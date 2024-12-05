@@ -35,11 +35,6 @@ ArbResult calldata_len(uint8_t *input, size_t len)
   return _return_success_bebi32(buf_out);
 }
 
-ArbResult hola_mundo(uint8_t *input, size_t len)
-{
-  return _return_short_string(Success, "Hola Mundo");
-}
-
 char *ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
   int i;
@@ -69,6 +64,17 @@ ArbResult ping_pong(uint8_t *input, size_t len)
   return _return_short_string(Success, "ping");
 }
 
+ArbResult hola_mundo(uint8_t *input, size_t len)
+{
+	return _return_short_string(Success, "Hola Mundo");
+}
+
+ArbResult mi_balance(uint8_t *input, size_t len)
+{
+	msg_sender_padded(buf_out);
+	return _return_success_bebi32(buf_out);
+}
+
 int handler(size_t argc)
 {
   // Save the function calldata (selector(bytes4) + fn_args(bytes))
@@ -84,7 +90,8 @@ int handler(size_t argc)
     // bytes32: 0x82B36ac385
       {to_function_selector("calldata_len()"), calldata_len},
       {to_function_selector("ping_pong(bytes32)"), ping_pong},
-      {to_function_selector("hola_mundo()"), hola_mundo}, // Add more functions as needed here
+      {to_function_selector("hola_mundo()"), hola_mundo},
+      {to_function_selector("mi_balance()"), mi_balance},
   };
 
   uint32_t signature = *((uint32_t *)argv); // Take function selector
