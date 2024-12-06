@@ -2,6 +2,7 @@
 #include "../stylus-sdk-c/include/stylus_utils.h"
 #include "../stylus-sdk-c/include/storage.h"
 #include "../stylus-sdk-c/include/string.h"
+#include "actions.h"
 
 /**
  * General utils/helpers
@@ -16,6 +17,7 @@ ArbResult inline _return_success_bebi32(bebi32 const retval) {
   return res;
 }
 
+/// Moveeeeee ----------------------------------------------
 // Validate if input is a valid address (padded to 32 bytes)
 bool inline is_valid_address(uint8_t *input, size_t len) {
   if (len != 32)
@@ -37,6 +39,7 @@ ArbResult mi_balance(uint8_t *input, size_t len) {
 	msg_sender_padded(buf_out);
 	return _return_success_bebi32(buf_out);
 }
+/// Moveeeeee ----------------------------------------------
 
 // Main handler to route calls to the appropriate function
 int handler(size_t argc) {
@@ -44,9 +47,13 @@ int handler(size_t argc) {
   read_args(argv); // Read function selector and calldata
 
   // Registry of functions
-  FunctionRegistry registry[] = {
-      {to_function_selector("calldata_len()"), calldata_len},
-      {to_function_selector("mi_balance()"), mi_balance},
+    FunctionRegistry registry[] = {
+        {to_function_selector("calldata_len()"), calldata_len},
+        {to_function_selector("mi_balance()"), mi_balance},
+        {to_function_selector("post_petition(bytes32)"), post_petition},
+        {to_function_selector("accept_petition(bytes32)"), accept_petition},
+        {to_function_selector("request_loan(bytes32)"), request_loan},
+        {to_function_selector("repay_loan(bytes32)"), repay_loan},
   };
 
   uint32_t signature = *((uint32_t *)argv); // Take function selector
