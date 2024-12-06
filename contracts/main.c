@@ -2,7 +2,9 @@
 #include "../stylus-sdk-c/include/stylus_utils.h"
 #include "../stylus-sdk-c/include/storage.h"
 #include "../stylus-sdk-c/include/string.h"
-#include "actions.h"
+
+// #include <stdio.h>
+// #include "actions.h"
 
 /**
  * General utils/helpers
@@ -50,10 +52,6 @@ int handler(size_t argc) {
     FunctionRegistry registry[] = {
         {to_function_selector("calldata_len()"), calldata_len},
         {to_function_selector("mi_balance()"), mi_balance},
-        {to_function_selector("post_petition(bytes32)"), post_petition},
-        {to_function_selector("accept_petition(bytes32)"), accept_petition},
-        {to_function_selector("request_loan(bytes32)"), request_loan},
-        {to_function_selector("repay_loan(bytes32)"), repay_loan},
   };
 
   uint32_t signature = *((uint32_t *)argv); // Take function selector
@@ -64,6 +62,7 @@ int handler(size_t argc) {
                                 signature, argv + 4, argc - 4 // Exclude the selector from calldata
   );
   // Write the result and return the status
+  // printf("Output: %s\n", re s.output);
   return (write_result(res.output, res.output_len), res.status);
 }
 
