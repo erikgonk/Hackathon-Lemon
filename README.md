@@ -27,7 +27,7 @@ To install and configure all the necessary environment, simply run the `install.
 
 3. **Add your Wallet:**
    
-   - Modify the next lines of ./playground/index.ts
+### Modify the next lines of ./playground/index.ts
    -     Line 18 and insert your Contact Address
    -     Line 26 and insert your Account
    
