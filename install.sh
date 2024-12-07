@@ -41,6 +41,8 @@ rust_install() {
 	echo -e "${YELLOW}Installing Rust...${NC}"
 	brew install rust
 	check_exit_status "Rust and cargo installed" "Failed to install Rust and cargo"
+	cargo install cargo-stylus
+	check_exit_status "cargo-stylus downloaded" "Failed to download cargo-stylus"
 }
 
 check_wasmld() {
