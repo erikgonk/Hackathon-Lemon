@@ -107,7 +107,7 @@ macos_install() {
 	check_rust "Rust is installed" "Rust not installed"
 	check_wabt
 	echo -e "${BOLD_GREEN}Installation complete${NC}"
-	echo -e "${BOLD_YELLOW}Please restart your terminal\nIf in any case you're facing some troubles try to reinstall llvm and rust manually!!${NC}"
+	echo -e "${BOLD_YELLOW}Please restart your terminal\nIf in any case you're facing any troubles try to reinstall llvm@15 and rust manually!!$\n\t Use:\n\t\t'brew reinstall llvm@15'\n\t\t\n\t\t'brew reinstall rust${NC}"
 }
 
 linux_install() {
