@@ -15,7 +15,7 @@ To install and configure all the necessary environment, simply run the `install.
 1. **Clone the repo:**
 
     ```bash
-    git clone https://github.com/erikgonk/Hackathon-Lemon.git Arbitrum_Stylus_Project
+    git clone --recurseshttps://github.com/erikgonk/Hackathon-Lemon.git Arbitrum_Stylus_Project
     cd Arbitrum_Stylus_Project
     git submodule update --init --recursive
     ```
