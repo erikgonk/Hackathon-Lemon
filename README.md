@@ -1,6 +1,22 @@
-# Arbitrum Stylus Project
+# Loan System with Arbitrum Stylus
 
-This repository contains a sample project developed with Arbitrum Stylus, a high-performance smart contract creation tool with support for WebAssembly.
+## Description
+
+The Smart Contract acts as the core logic of the lending platform. It manages the following main operations:
+1. **Collateral deposit:** 2.
+   - Users can deposit collateralized tokens into the contract. These tokens serve as collateral for a loan.
+   - The contract maintains a collateral balance record for each user.
+   
+2. **Loan application:**
+   - A user can request a loan based on the value of the collateral deposited.
+   - The contract calculates how much can be lent based on a collateralization ratio (e.g. 150% of the requested loan).
+   
+3. **Loan repayment
+   - Users can repay the loan along with the corresponding interest.
+   - Once repaid, they can withdraw their collateral.
+   
+4. **Liquidation:**
+   - If the value of the collateral falls below a security threshold (e.g. 120% of the loan), the contract allows third parties to liquidate the collateral to cover the outstanding debt.
 
 ## Instalation
 
@@ -34,32 +50,32 @@ To install and configure all the necessary environment, simply run the `install.
     cargo stylus deploy --wasm-file ./contract.wasm -e https://sepolia-rollup.arbitrum.io/rpc --cargo-stylus-version 0.5.3 --private-key INSERT_YOUR_PRIVATE_KEY
     ```
 
-Este script realiza lo siguiente:
-- Verifica la instalación de Node.js, Docker, Rust y el CLI de Arbitrum Stylus.
-- Descarga e instala las dependencias necesarias.
-- Configura un nodo local de Arbitrum utilizando Docker.
-- Compila y despliega los contratos Stylus en el nodo local.
+This script performs the following:
+- Verifies the installation of Node.js, Docker, Rust and the Arbitrum Stylus CLI.
+- Downloads and installs the necessary dependencies.
+- Configures a local Arbitrum node using Docker.
+- Compile and deploy Stylus contracts to the local node.
 
-## Estructura del repositorio
+## Repo Structure
 
-#### El repositorio contiene los siguientes archivos y directorios:
+#### The repository contains the following files and directories:
 
-- `install.sh`: Script de instalación que configura el entorno, las dependencias y el nodo local de Arbitrum.
+- `install.sh`: Installation script that configures the environment, dependencies and the local Arbitrum node.
 
-- `frontend/`: Contiene la interfaz de usuario para interactuar con el nodo de Arbitrum y los contratos Stylus.
+- `frontend/`: Contains the user interface for interacting with the Arbitrum node and Stylus contracts.
 
-- `contracts/`: Almacena los contratos inteligentes escritos en WASM o lenguajes compatibles con Stylus para su despliegue.
+- `contracts/`: Stores smart contracts written in WASM or Stylus-compatible languages for deployment.
 
-- `playground/`: Un entorno de pruebas para interactuar con los contratos y validar su funcionamiento.
+- `playground/`: A test environment for interacting with contracts and validating their operation.
 
-- `stylus-sdk-c/`: SDK para interactuar con Stylus utilizando C y facilitar el desarrollo de aplicaciones compatibles.
+- `stylus-sdk-c/`: SDK to interact with Stylus using C and facilitate the development of compatible applications.
 
-- `include/`: Contiene archivos de encabezado necesarios para el SDK y otros componentes.
+- `include/`: Contains header files needed for the SDK and other components.
 
-- `Cargo.toml, Cargo.lock, rust-toolchain.toml`: Configuraciones necesarias para el entorno Rust.
+- `Cargo.toml, Cargo.lock, rust-toolchain.toml`: Configurations needed for the Rust environment.
 
-- `Makefile`: Contiene las instrucciones necesarias para automatizar tareas de compilación y configuración.
+- `Makefile`: Contains the necessary instructions to automate compilation and configuration tasks.
 
-- `package.json`: Archivo de configuración para dependencias de JavaScript y tareas de frontend.
+- `package.json`: Configuration file for JavaScript dependencies and frontend tasks.
 
-- `build.rs & entry.rs`: Scripts relacionados con la construcción y configuración de los contratos Stylus y otros componentes.
+- `build.rs & entry.rs`: Scripts related to building and configuring Stylus contracts and other components.
