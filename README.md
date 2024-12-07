@@ -12,6 +12,7 @@ Para instalar y configurar todo el entorno necesario, simplemente ejecuta el scr
 
     ```bash
     git clone https://github.com/erikgonk/Hackathon-Lemon.git Hackaton_Lemon
+    git submodule update --init --recursive
     cd Hackaton_Lemon
     ```
 
