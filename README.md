@@ -1,22 +1,10 @@
 # Loan System with Arbitrum Stylus
 
-## Description
+## What Aimed to Create and our Result
+- We wanted to do a Loan system which took a collateral deposit for the gas used, requested the loan and once accepted payed it.
+- We also added an extra part to make the installation of all the dependencies and lets you execute a basic program adding your information
 
-The Smart Contract acts as the core logic of the lending platform. It manages the following main operations:
-1. **Collateral deposit:** 2.
-   - Users can deposit collateralized tokens into the contract. These tokens serve as collateral for a loan.
-   - The contract maintains a collateral balance record for each user.
-   
-2. **Loan application:**
-   - A user can request a loan based on the value of the collateral deposited.
-   - The contract calculates how much can be lent based on a collateralization ratio (e.g. 150% of the requested loan).
-   
-3. **Loan repayment
-   - Users can repay the loan along with the corresponding interest.
-   - Once repaid, they can withdraw their collateral.
-   
-4. **Liquidation:**
-   - If the value of the collateral falls below a security threshold (e.g. 120% of the loan), the contract allows third parties to liquidate the collateral to cover the outstanding debt.
+- The final result was not as expected, it ended up not working hence we kept the initial version which created the contract with the ping-pong and Hello World and the bash scripting `install.sh` to install everything 
 
 ## Instalation
 
@@ -41,7 +29,7 @@ To install and configure all the necessary environment, simply run the `install.
 3. **Add your Wallet:**
    
         ```bash
-   Change line 18 and insert your Contact Address
+   Change line 18 and insert your Contact Address ```
    Change Line 26 and insert your Account
       ```
    
