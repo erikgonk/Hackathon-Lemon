@@ -25,27 +25,28 @@ To install and configure all the necessary environment, simply run the `install.
     bash install.sh
     ```
 
-3. **Add your Wallet:**
    
-    ##### Modify the next lines of ./playground/index.ts
-   - Line 18 and insert your Contact Address
-   - Line 26 and insert your Account
-   
-5. **Execute the program:**
+3. **Execute the program:**
     ```bash
     make
     cargo stylus deploy --wasm-file ./contract.wasm -e https://sepolia-rollup.arbitrum.io/rpc --cargo-stylus-version 0.5.3 --private-key INSERT_YOUR_PRIVATE_KEY
     ```
 
-This script performs the following:
-- Verifies the installation of Node.js, Docker, Rust and the Arbitrum Stylus CLI.
-- Downloads and installs the necessary dependencies.
-- Configures a local Arbitrum node using Docker.
-- Compile and deploy Stylus contracts to the local node.
+4. **Add your Wallet:**
+   
+    ##### Modify the next lines of ./playground/index.ts
+   - Line 18 and insert your Contact Address
+   - Line 26 and insert your Account
+  
+5. **Run Frontend**
+
+   ```bash
+    npm install
+    make play
+    npm run frontend
+    ```
 
 ## Repo Structure
-
-#### The repository contains the following files and directories:
 
 - `install.sh`: Installation script that configures the environment, dependencies and the local Arbitrum node.
 
