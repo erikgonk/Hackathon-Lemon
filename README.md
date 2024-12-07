@@ -1,25 +1,37 @@
 # Arbitrum Stylus Project
 
-Este repositorio contiene un proyecto de ejemplo desarrollado con Arbitrum Stylus, una herramienta para la creación de contratos inteligentes de alto rendimiento con soporte para WebAssembly.
+This repository contains a sample project developed with Arbitrum Stylus, a high-performance smart contract creation tool with support for WebAssembly.
 
-## Instalación
+## Instalation
 
-Para instalar y configurar todo el entorno necesario, simplemente ejecuta el script `install.sh` incluido en este repositorio. Este script se encarga de instalar todas las dependencias y configurar el proyecto.
+To install and configure all the necessary environment, simply run the `install.sh` script included in this repository. This script takes care of installing all the dependencies and configuring the project.
 
-### Pasos:
+### Steps:
 
-1. **Clona este repositorio:**
+1. **Clone the repo:**
 
     ```bash
-    git clone https://github.com/erikgonk/Hackathon-Lemon.git Hackaton_Lemon
+    git clone https://github.com/erikgonk/Hackathon-Lemon.git Arbitrum_Stylus_Project
+    cd Arbitrum_Stylus_Project
     git submodule update --init --recursive
-    cd Hackaton_Lemon
     ```
 
-2. **Ejecuta el script de instalación:**
+2. **Run the installation script:**
 
     ```bash
     bash install.sh
+    ```
+
+3. **Add your Wallet:**
+        ```bash
+   Change line 18 and insert your Contact Address
+   Change Line 26 and insert your Account
+       ```
+   
+5. **Execute the program:**
+    ```bash
+    make
+    cargo stylus deploy --wasm-file ./contract.wasm -e https://sepolia-rollup.arbitrum.io/rpc --cargo-stylus-version 0.5.3 --private-key INSERT_YOUR_PRIVATE_KEY
     ```
 
 Este script realiza lo siguiente:
