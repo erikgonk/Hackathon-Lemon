@@ -28,8 +28,8 @@ To install and configure all the necessary environment, simply run the `install.
 3. **Add your Wallet:**
    
     ##### Modify the next lines of ./playground/index.ts
-   -     Line 18 and insert your Contact Address
-   -     Line 26 and insert your Account
+   - Line 18 and insert your Contact Address
+   - Line 26 and insert your Account
    
 5. **Execute the program:**
     ```bash
