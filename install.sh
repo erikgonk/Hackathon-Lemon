@@ -44,7 +44,7 @@ rust_install() {
 }
 
 check_wasmld() {
-	wasm-ld --version
+	wasm-ld --version &> /dev/null
 	check_exit_status "$1" "$2"
 }
 
