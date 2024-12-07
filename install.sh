@@ -1,24 +1,45 @@
 #!/bin/bash
 
+RED='\033[0;31m'
+BOLD_RED='\033[1;31m'
+GREEN='\033[0;32m'
+BOLD_GREEN='\033[1;32m'
+NC='\033[0m'
+YELLOW='\033[0;33m'
+BOLD_YELLOW='\033[1;33m'
+
+check_exit_status() {
+    if [ $? -eq 0 ]; then
+        echo -e "${GREEN}$1${NC}"
+        return 0
+    else
+        echo -e "${BOLD_RED}$2${NC}"
+        return 1
+    fi
+}
+
 check_wabt() {
-	brew install wabt > /dev/null
-	if [ $? -eq 0 ]; then
-		echo "Wabt installed"
+	if which wasm2wat &> /dev/null; then
+		echo -e "${GREEN}Wabt is installed${NC}"
 		return 0
 	else
-		echo "Failed to install Wabt"
-		return 1
+		echo -e "${YELLOW}Installing Wabt...${NC}"
+		brew install wabt
+		check_exit_status "Wabt installed" "Failed to install Wabt"
 	fi
-	wasm-strip --version
+}
+
+check_rust() {
+	rustc --version &> /dev/null
+	check_exit_status "$1" "$2"
+	if [ $? -eq 1 ]; then
+		rust_install
+	fi
 }
 
 rust_install() {
-	echo "Installing Rust..."
-	brew install rust > /dev/null
-	check_exit_status "Rust installed" "Failed to install Rust"
-    # export PATH="$HOME/.cargo/bin:$PATH"
-	# source ~/.${SHELL##*/}rc
-	rustc --version && cargo --version
+	echo -e "${YELLOW}Installing Rust...${NC}"
+	brew install rust
 	check_exit_status "Rust and cargo installed" "Failed to install Rust and cargo"
 }
 
@@ -28,43 +49,37 @@ check_wasmld() {
 }
 
 llvm_install(){
+	echo -e "${GREEN}Installing LLVM...${NC}"
 	brew install llvm@15
 	check_exit_status "$1" "$2"
-	echo "Setting up LLVM..."
-    echo 'export PATH="$HOME/.brew/opt/llvm@15/bin:$PATH"' >> $HOME/.${SHELL##*/}rc
-	# source ~/.${SHELL##*/}rc
+	echo -e "${YELLOW}Setting up LLVM...${NC}"
+    echo -e 'export PATH="$HOME/.brew/opt/llvm@15/bin:$PATH"' >> $HOME/.${SHELL##*/}rc
+	echo -e "${GREEN}LLVM installed${NC}"
 }
 
 check_llvm() { 
 	llvm-config --version &> /dev/null;
 	check_exit_status "$1" "$2"
+	if [ $? -eq 1 ]; then
+		llvm_install
+	fi
 }
 
 check_docker_desktop() {
 	if [ -d "/Applications/Docker.app" ]; then
-		echo "Docker Desktop is installed"
+		echo -e "${GREEN}Docker Desktop is installed${NC}"
 		return 0
 	else
-		echo "Installing Docker Desktop..."
+		echo -e "Installing Docker Desktop..."
 		brew install --cask docker
 		if [ $? -eq 0 ]; then
-			echo "Docker Desktop installed"
+			echo -e "Docker Desktop installed"
 			return 0
 		else
-			echo "Failed to install Docker Desktop"
+			echo -e "Failed to install Docker Desktop"
 			return 1
 		fi
 	fi
-}
-
-check_exit_status() {
-    if [ $? -eq 0 ]; then
-        echo -e "$1"
-        return 0
-    else
-        echo -e "$2"
-        return 1
-    fi
 }
 
 check_brew() {
@@ -76,47 +91,37 @@ check_brew() {
 }
 
 macos_install() {
-	echo "Installing dependencies..."
+	echo -e "${YELLOW}Installing dependencies. for macOS...${NC}"
 	check_brew
 	if [ $? -eq 0 ]; then
-		echo "Brew is installed"
+		echo -e "${GREEN}Brew is installed${NC}"
 	else
-		echo "Installing Brew..."
+		echo -e "${YELLOW}Installing Brew...${NC}"
 		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	fi
 	check_docker_desktop
 	check_llvm "LLVM is installed" "LLVM not installed"
-	llvm_install "LLVM installed" "Failed to install LLVM"
-	# check_wasmld "Wasm-ld is installed\ncheck PATH or try manually 'brew reinstall llvm'" "Installed Wasm-ld..."
-	rust_install
+	check_wasmld "Wasm-ld is installed\ncheck PATH or try manually 'brew reinstall llvm'" "Installed Wasm-ld..."
+	check_rust "Rust is installed" "Rust not installed"
 	check_wabt
-	echo
+	echo -e "${BOLD_GREEN}Installation complete${NC}"
+	echo -e "${BOLD_YELLOW}Please restart your terminal\nIf in any case you're facing some troubles try to reinstall llvm and rust manually!!${NC}"
 }
 
 linux_install() {
-	echo "Installing for Linux"
+	echo -e "${BOLD_RED}Installation for Linux pending${NC}"
 }
 
 check_os() {
 	if [[ $OSTYPE == darwin* ]]; then
 		macos_install
 	elif [[ $OSTYPE == linux* ]]; then
-		echo "Linux"
+		echo -e "Linux"
 	else
-		echo "Unsupported OS"
+		echo -e "${BOLD_RED}Unsupported OS${NC}"
 		exit 1
 	fi
 }
 
-echo "Installing..."
+echo -e "${YELLOW}Installing...${NC}"
 check_os
-
-# # curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
-# brew install llvm
-# export PATH="/usr/local/opt/llvm/bin:$PATH"
-# export LDFLAGS="-L/usr/local/opt/llvm/lib"
-# export CPPFLAGS="-I/usr/local/opt/llvm/include"
-# export CXX=clang++
-# export CC=clang
-# source $SHELL
-# source ~/.bashrc
