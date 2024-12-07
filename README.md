@@ -1,35 +1,53 @@
-# Arbitrum Stylus Starter Template for C
+# Arbitrum Stylus Project
 
-## Register and Storage Slots
+Este repositorio contiene un proyecto de ejemplo desarrollado con Arbitrum Stylus, una herramienta para la creación de contratos inteligentes de alto rendimiento con soporte para WebAssembly.
 
-Storage slots are pretty similar to registers in 32bit architectures.
-Since both have:
+## Instalación
 
-1. Fixed Size: Storage slots in Ethereum can hold exactly 32 bytes. Similar to how registers have a fixed size in assembly (e.g., 32-bit, 64-bit).
+Para instalar y configurar todo el entorno necesario, simplemente ejecuta el script `install.sh` incluido en este repositorio. Este script se encarga de instalar todas las dependencias y configurar el proyecto.
 
-2. Direct Addressing: Just as you access a specific register by its identifier (eax, r1), you access storage slots using their indexes: 0x01, 0x02.
+### Pasos:
 
-3. Explicit Management: Like assembly programming, developers must explicitly manage how storage slots are allocated and used. Miss assignment of memory/slots can cause data corruption.
+1. **Clona este repositorio:**
 
-## Requisitos
+    ```bash
+    git clone https://github.com/erikgonk/Hackathon-Lemon.git Hackaton_Lemon
+    git submodule update --init --recursive
+    cd Hackaton_Lemon
+    ```
 
-- Brew (Mac) / Chocolatey (Windows)
-- Docker (Docker Desktop)
-- clang y maketools
-- LLVM (con wasm-ld): Disponible desde la versión 15 (llvm@15)
-- Rust cargo
+2. **Ejecuta el script de instalación:**
 
-## Check to have `wasm-strip` installed
+    ```bash
+    bash install.sh
+    ```
 
-Podemos instalarlo con `brew install wabt`
+Este script realiza lo siguiente:
+- Verifica la instalación de Node.js, Docker, Rust y el CLI de Arbitrum Stylus.
+- Descarga e instala las dependencias necesarias.
+- Configura un nodo local de Arbitrum utilizando Docker.
+- Compila y despliega los contratos Stylus en el nodo local.
 
-## Instalando Cargo Stylus
+## Estructura del repositorio
 
-- `git submodule update --init --recursive`
-- `cargo install cargo-stylus`
-- `rustup target add wasm32-unknown-unknown`
+#### El repositorio contiene los siguientes archivos y directorios:
 
-## Validar entorno de desarollo
+- `install.sh`: Script de instalación que configura el entorno, las dependencias y el nodo local de Arbitrum.
 
-- `make` para generar el archivo contract.wasm
-- `cargo stylus check --wasm-file ./contract.wasm -e https://sepolia-rollup.arbitrum.io/rpc` (si tenemos output en verde estamos ok)
+- `frontend/`: Contiene la interfaz de usuario para interactuar con el nodo de Arbitrum y los contratos Stylus.
+
+- `contracts/`: Almacena los contratos inteligentes escritos en WASM o lenguajes compatibles con Stylus para su despliegue.
+
+- `playground/`: Un entorno de pruebas para interactuar con los contratos y validar su funcionamiento.
+
+- `stylus-sdk-c/`: SDK para interactuar con Stylus utilizando C y facilitar el desarrollo de aplicaciones compatibles.
+
+- `include/`: Contiene archivos de encabezado necesarios para el SDK y otros componentes.
+
+- `Cargo.toml, Cargo.lock, rust-toolchain.toml`: Configuraciones necesarias para el entorno Rust.
+
+- `Makefile`: Contiene las instrucciones necesarias para automatizar tareas de compilación y configuración.
+
+- `package.json`: Archivo de configuración para dependencias de JavaScript y tareas de frontend.
+
+- `build.rs & entry.rs`: Scripts relacionados con la construcción y configuración de los contratos Stylus y otros componentes.
