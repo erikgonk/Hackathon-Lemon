@@ -39,10 +39,11 @@ To install and configure all the necessary environment, simply run the `install.
     ```
 
 3. **Add your Wallet:**
+   
         ```bash
    Change line 18 and insert your Contact Address
    Change Line 26 and insert your Account
-       ```
+      ```
    
 5. **Execute the program:**
     ```bash
